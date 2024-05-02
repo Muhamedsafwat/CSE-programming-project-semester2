@@ -25,11 +25,9 @@ public class HelloApplication extends Application {
         ToolBar toolBar = new ToolBar();
         mainSection.getChildren().addAll(componentsList, workingSpace);
         //create a testing gate
-         Gate gate = new Gate();
-         Gate gate2 = new Gate();
+         ORGate gate = new ORGate();
         //add elements to working space
-        workingSpace.getChildren().addAll(gate, gate2);
-
+        workingSpace.getChildren().addAll(gate);
         //add elements to the root and show the stage
         root.getChildren().addAll(toolBar,mainSection);
         stage.setTitle("LogicSim || CSE#27");

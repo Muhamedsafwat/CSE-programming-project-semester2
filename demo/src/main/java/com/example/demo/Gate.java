@@ -17,24 +17,24 @@ public class Gate extends HBox {
     double startX;
     double startY;
 
-    public Gate() {
+    public Gate(String imageURL) {
         super();
         // Create input & output buttons
-         input1Button = new Circle();
-         input2Button = new Circle();
-         outputButton = new Circle();
+        input1Button = new Circle();
+        input2Button = new Circle();
+        outputButton = new Circle();
         //style inputs and outputs
-        input1Button.setRadius(8);
-        input2Button.setRadius(8);
-        outputButton.setRadius(8);
+        input1Button.setRadius(6);
+        input2Button.setRadius(6);
+        outputButton.setRadius(6);
         input1Button.setFill(Color.GRAY);
         input2Button.setFill(Color.GRAY);
         outputButton.setFill(Color.GRAY);
         //create image view
-        ImageView imageView = new ImageView(new Image("OR.png"));
+        ImageView imageView = new ImageView(new Image(imageURL));
         // Set layout for the input elements
         VBox inputBox = new VBox(input1Button, input2Button);
-        inputBox.setSpacing(5);
+        inputBox.setSpacing(8);
         inputBox.setAlignment(Pos.CENTER);
         // Handle button actions
         input1Button.setOnMouseClicked(e -> {
@@ -60,26 +60,24 @@ public class Gate extends HBox {
             setTranslateY(e.getSceneY() - startY);
         });
     }
-    // Method to update the output label based on input values
-    private void updateOutput() {
-      output = input1 || input2;
-      //update inputs and output colors based on their state
-      if (input1) {
-          input1Button.setFill(Color.GREEN);
-      } else {
-          input1Button.setFill(Color.GRAY);
-      }
-      if (input2) {
-          input2Button.setFill(Color.GREEN);
-      } else {
-          input2Button.setFill(Color.GRAY);
-      }
-      if (output) {
-          outputButton.setFill(Color.GREEN);
-      } else {
-          outputButton.setFill(Color.GRAY);
-      }
-    }
 
+    // Method to update the output label based on input values
+     void updateOutput() {
+         if (input1) {
+             input1Button.setFill(Color.GREEN);
+         } else {
+             input1Button.setFill(Color.GRAY);
+         }
+         if (input2) {
+             input2Button.setFill(Color.GREEN);
+         } else {
+             input2Button.setFill(Color.GRAY);
+         }
+         if (output) {
+             outputButton.setFill(Color.GREEN);
+         } else {
+             outputButton.setFill(Color.GRAY);
+         }
+     }
 
 }

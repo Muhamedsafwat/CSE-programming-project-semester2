@@ -11,7 +11,7 @@ import javafx.scene.shape.Circle;
 public class Gate2 extends HBox{
     //define inputs and outputs
     boolean input, output = false;
-    Circle inputButton ,outputButton;
+    Terminal inputButton ,outputButton;
     //X and Y coordinates for drag & drop
     double startX;
     double startY;
@@ -19,13 +19,9 @@ public class Gate2 extends HBox{
     public Gate2(String imageURL) {
         super();
         // Create input & output button
-        inputButton = new Circle();
-        outputButton = new Circle();
+        inputButton = new Terminal(false);
+        outputButton = new Terminal(true);
         //style inputs and outputs
-        inputButton.setRadius(6);
-        outputButton.setRadius(6);
-        inputButton.setFill(Color.GRAY);
-        outputButton.setFill(Color.GRAY);
         //create image view
         ImageView imageView = new ImageView(new Image(imageURL));
         // Set layout for the input elements
@@ -54,17 +50,8 @@ public class Gate2 extends HBox{
 
     // Method to update the output label based on input values
     void updateOutput() {
-
-        if (input) {
-            inputButton.setFill(Color.GREEN);
-        } else {
-            inputButton.setFill(Color.GRAY);
-        }
-        if (output) {
-            outputButton.setFill(Color.GREEN);
-        } else {
-            outputButton.setFill(Color.GRAY);
-        }
+        inputButton.setState(input);
+        outputButton.setState(output);
     }
 
 }

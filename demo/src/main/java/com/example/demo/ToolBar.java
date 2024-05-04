@@ -16,44 +16,44 @@ import javafx.scene.text.FontWeight;
 import java.util.Objects;
 
 public class ToolBar extends HBox {
-    public String tool = "Drag";
+    public static String tool = "Drag";
     Button setDrag;
     Button setConnect;
     Button setDelete;
     public ToolBar() {
         super();
-         //create label
+        //create label
         Pane titleContainer = new Pane();
         Label title = new Label("LogicSim");
         title.setTextFill(Color.WHITE);
         title.setFont(Font.font("System", FontWeight.BOLD, 20));
         titleContainer.getChildren().add(title);
         titleContainer.setPadding(new Insets(0, 130,0 , 0));
-         //create buttons
-         setDrag = new Button();
-         setConnect = new Button();
-         setDelete = new Button();
-         //create images for button icons
-         ImageView connectIcon = new ImageView(new Image("connect.png"));
-         ImageView moveIcon = new ImageView(new Image("move.png"));
-         ImageView deleteIcon = new ImageView(new Image("delete.png"));
-         connectIcon.setFitHeight(20);
-         connectIcon.setFitWidth(20);
-         moveIcon.setFitHeight(20);
-         moveIcon.setFitWidth(20);
-         deleteIcon.setFitHeight(20);
-         deleteIcon.setFitWidth(20);
-         //add icons to buttons
-         setDrag.setBackground(null);
-         setDrag.setStyle("-fx-background-color: lightblue;");
-         setConnect.setBackground(null);
-         setDrag.setGraphic(moveIcon);
-         setDelete.setBackground(null);
-         setDelete.setGraphic(deleteIcon);
-         setConnect.setGraphic(connectIcon);
+        //create buttons
+        setDrag = new Button();
+        setConnect = new Button();
+        setDelete = new Button();
+        //create images for button icons
+        ImageView connectIcon = new ImageView(new Image("connect.png"));
+        ImageView moveIcon = new ImageView(new Image("move.png"));
+        ImageView deleteIcon = new ImageView(new Image("delete.png"));
+        connectIcon.setFitHeight(20);
+        connectIcon.setFitWidth(20);
+        moveIcon.setFitHeight(20);
+        moveIcon.setFitWidth(20);
+        deleteIcon.setFitHeight(20);
+        deleteIcon.setFitWidth(20);
+        //add icons to buttons
+        setDrag.setBackground(null);
+        setDrag.setStyle("-fx-background-color: lightblue;");
+        setConnect.setBackground(null);
+        setDrag.setGraphic(moveIcon);
+        setDelete.setBackground(null);
+        setDelete.setGraphic(deleteIcon);
+        setConnect.setGraphic(connectIcon);
         //handle button actions
         setDrag.setOnAction(e -> {
-           updateState("Drag");
+            updateState("Drag");
         });
         setConnect.setOnAction(e -> {
             updateState("Connect");
@@ -90,6 +90,7 @@ public class ToolBar extends HBox {
             setDrag.setStyle("-fx-background-color: transparent;");
             setConnect.setStyle("-fx-background-color: transparent;");
         }
+        Gate.updateTool();
 
     };
 }

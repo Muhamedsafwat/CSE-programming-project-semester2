@@ -24,10 +24,34 @@ public class HelloApplication extends Application {
         Pane workingSpace = new Pane();
         ToolBar toolBar = new ToolBar();
         mainSection.getChildren().addAll(componentsList, workingSpace);
-        //create a testing gate
-         ORGate gate = new ORGate();
+        //create a OR gate
+         ORGate gate1 = new ORGate();
         //add elements to working space
-        workingSpace.getChildren().addAll(gate);
+        workingSpace.getChildren().addAll(gate1);
+        //create a AND gate
+        ANDGate gate2 = new ANDGate();
+        //add elements to working space
+        workingSpace.getChildren().addAll(gate2);
+        //create a NAND gate
+        NANDGate gate3 = new NANDGate();
+        //add elements to working space
+        workingSpace.getChildren().addAll(gate3);
+        //create a NOR gate
+        NORGate gate4 = new NORGate();
+        //add elements to working space
+        workingSpace.getChildren().addAll(gate4);
+        //create a NOT gate
+        NOTGate gate5 = new NOTGate();
+        //add elements to working space
+        workingSpace.getChildren().addAll(gate5);
+        //create a XOR gate
+        XORGate gate6 = new XORGate();
+        //add elements to working space
+        workingSpace.getChildren().addAll(gate6);
+        //create a XNOR gate
+        XNORGate gate7 = new XNORGate();
+        //add elements to working space
+        workingSpace.getChildren().addAll(gate7);
         //add elements to the root and show the stage
         root.getChildren().addAll(toolBar,mainSection);
         stage.setTitle("LogicSim || CSE#27");

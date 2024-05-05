@@ -28,10 +28,10 @@ public class HelloApplication extends Application {
         // Create a scale transformation
         Scale scale = new Scale(1, 1);
 
-        // Set the transformation pivot point to the center of the button
+       // Set the transformation pivot point to the center of the working space
         workingSpace.getTransforms().add(scale);
 
-        // Add an event handler to the button to handle zooming
+        // Add an event handler to the working space to handle zooming
         workingSpace.setOnScroll(event -> {
             double delta = event.getDeltaY();
             double scaleFactor = (delta > 0) ? 1.1 : 0.9;

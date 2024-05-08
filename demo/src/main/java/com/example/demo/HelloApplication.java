@@ -1,6 +1,7 @@
 package com.example.demo;
 
 import javafx.application.Application;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -9,8 +10,10 @@ import javafx.scene.paint.Color;
 import javafx.scene.transform.Scale;
 import javafx.stage.Stage;
 import java.io.IOException;
+import java.util.Objects;
 
 public class HelloApplication extends Application {
+    public static Pane workingSpace;
     VBox root;
     @Override
     public void start(Stage stage) throws IOException {
@@ -22,7 +25,7 @@ public class HelloApplication extends Application {
         //create main sections
         ComponentsList componentsList  = new ComponentsList();
         HBox mainSection = new HBox();
-        Pane workingSpace = new Pane();
+        workingSpace = new Pane();
         ToolBar toolBar = new ToolBar();
         mainSection.getChildren().addAll(componentsList, workingSpace);
         // Create a scale transformation
@@ -38,40 +41,25 @@ public class HelloApplication extends Application {
             scale.setX(scale.getX() * scaleFactor);
             scale.setY(scale.getY() * scaleFactor);
 });
-        //create a OR gate
-         ORGate gate1 = new ORGate();
-        //add elements to working space
-        workingSpace.getChildren().addAll(gate1);
-        //create a AND gate
-        ANDGate gate2 = new ANDGate();
-        //add elements to working space
-        workingSpace.getChildren().addAll(gate2);
-        //create a NAND gate
-        NANDGate gate3 = new NANDGate();
-        //add elements to working space
-        workingSpace.getChildren().addAll(gate3);
-        //create a NOR gate
-        NORGate gate4 = new NORGate();
-        //add elements to working space
-        workingSpace.getChildren().addAll(gate4);
-        //create a NOT gate
-        NOTGate gate5 = new NOTGate();
-        //add elements to working space
-        workingSpace.getChildren().addAll(gate5);
-        //create a XOR gate
-        XORGate gate6 = new XORGate();
-        //add elements to working space
-        workingSpace.getChildren().addAll(gate6);
-        //create a XNOR gate
-        XNORGate gate7 = new XNORGate();
-        //add elements to working space
-        workingSpace.getChildren().addAll(gate7);
+
+        //test 8 bit converter
+        _8bit_converter converter = new _8bit_converter();
+        workingSpace.getChildren().add(converter);
+        workingSpace.getChildren().forEach(this::makeRemovable);
         //add elements to the root and show the stage
         root.getChildren().addAll(toolBar,mainSection);
         stage.setTitle("LogicSim || CSE#27");
         stage.setScene(scene);
         stage.show();
 
+    }
+
+    void makeRemovable (Node node) {
+        node.setOnMouseClicked(event -> {
+            if (Objects.equals(ToolBar.tool, "Delete")) {
+                workingSpace.getChildren().remove(node);
+            }
+        });
     }
 
 

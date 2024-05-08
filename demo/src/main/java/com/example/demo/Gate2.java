@@ -7,8 +7,11 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
+import java.util.Objects;
+
 //this gate for not gate
 public class Gate2 extends HBox{
+    public static String tool = ToolBar.tool;
     //define inputs and outputs
     boolean input, output = false;
     Terminal inputButton ,outputButton;
@@ -17,8 +20,10 @@ public class Gate2 extends HBox{
     double startY;
 
     public Gate2(String imageURL) {
+
         super();
         // Create input & output button
+
         inputButton = new Terminal(false);
         outputButton = new Terminal(true);
         //style inputs and outputs
@@ -43,8 +48,10 @@ public class Gate2 extends HBox{
             startY = e.getSceneY() - getTranslateY();
         });
         setOnMouseDragged(e -> {
-            setTranslateX(e.getSceneX() - startX);
-            setTranslateY(e.getSceneY() - startY);
+            if (Objects.equals(tool, "Drag")) {
+                setTranslateX(e.getSceneX() - startX);
+                setTranslateY(e.getSceneY() - startY);
+            }
         });
     }
 
@@ -52,6 +59,9 @@ public class Gate2 extends HBox{
     void updateOutput() {
         inputButton.setState(input);
         outputButton.setState(output);
+    }
+    public static void updateTool () {
+        tool = ToolBar.tool;
     }
 
 }

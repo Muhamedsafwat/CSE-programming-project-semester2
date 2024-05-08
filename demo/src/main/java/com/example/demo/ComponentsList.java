@@ -13,40 +13,25 @@ public class ComponentsList extends Pane {
         super();
         //create buttons
         Button b1=new Button("Input Controls");
-        Button b2=new Button("Toogle Switch");
-        Button b3=new Button("Push Button");
-        Button b4=new Button("Clock");
-        Button b5=new Button("Low Constant");
-        Button b6=new Button("High Constant");
+        Button switchBtn=new Button("Toggle Switch");
+        Button constLowBtn=new Button("Low Constant");
+        Button constHighBtn=new Button("High Constant");
         Button b7=new Button("OutPut Controls");
-        Button b8=new Button("Light Blumb");
-        Button b9=new Button("4-Bits Dight");
+        Button bulbBtn=new Button("Light Bulb");
         Button b10=new Button("Logic Gates");
-        Button b11=new Button("Buffer");
-        Button b12=new Button("NOT Gate");
-        Button b13=new Button("AND Gate");
-        Button b14=new Button("NAND Gate");
-        Button b15=new Button("OR Gate");
-        Button b16=new Button("NOR Gate");
-        Button b17=new Button("XOR Gate");
-        Button b18=new Button("XNOR Gate");
-        Button b19=new Button("Tri-State");
-        Button b20=new Button("Flip-Flop");
-        Button b21=new Button("SR Flip-Flop");
-        Button b22=new Button("D Flip-Flop");
-        Button b23=new Button("JK Flip-Flop ");
-        Button b24=new Button("T Flip-Flop");
-        Button b25=new Button("Other");
-        Button b26=new Button("Label");
-        Button b27=new Button("Bus");
-        Button b28=new Button("Pull Up");
-        Button b29=new Button("Pull Down");
+        Button NOTBtn=new Button("NOT Gate");
+        Button ANDBtn=new Button("AND Gate");
+        Button NANDBtn=new Button("NAND Gate");
+        Button ORBtn=new Button("OR Gate");
+        Button NORBtn=new Button("NOR Gate");
+        Button XORBtn=new Button("XOR Gate");
+        Button XNORBtn=new Button("XNOR Gate");
+
         //adjust buttons width
         b1.setPrefWidth(240);
         b7.setPrefWidth(240);
         b10.setPrefWidth(240);
-        b20.setPrefWidth(240);
-        b25.setPrefWidth(240);
+
         //create HBoxes
         HBox h1=new HBox();
         HBox h2=new HBox();
@@ -67,28 +52,19 @@ public class ComponentsList extends Pane {
         HBox h17=new HBox();
         HBox h18=new HBox();
         //add buttons to HBoxes
-
         h1.getChildren().addAll(b1);
-        h2.getChildren().addAll(b2,b3);
-        h3.getChildren().addAll(b4,b5);
-        h4.getChildren().addAll(b6);
+        h2.getChildren().addAll(switchBtn);
+        h3.getChildren().addAll(constLowBtn,constHighBtn);
+        h6.getChildren().addAll(bulbBtn);
         h5.getChildren().addAll(b7);
-        h6.getChildren().addAll(b8,b9);
         h7.getChildren().addAll(b10);
-        h8.getChildren().addAll(b11,b12);
-        h9.getChildren().addAll(b13,b14);
-        h10.getChildren().addAll(b15,b16);
-        h11.getChildren().addAll(b17,b18);
-        h12.getChildren().addAll(b19);
-        h13.getChildren().addAll(b20);
-        h14.getChildren().addAll(b21,b22);
-        h15.getChildren().addAll(b23,b24);
-        h16.getChildren().addAll(b25);
-        h17.getChildren().addAll(b26,b27);
-        h18.getChildren().addAll(b28,b29);
+        h8.getChildren().addAll(NOTBtn,ANDBtn);
+        h9.getChildren().addAll(NANDBtn,ORBtn);
+        h10.getChildren().addAll(NORBtn,XORBtn);
+        h11.getChildren().addAll(XNORBtn);
         //set HBoxes spacings
         h2.setSpacing(50);
-        h3.setSpacing(95);
+        h3.setSpacing(50);
         h6.setSpacing(50);
         h7.setSpacing(50);
         h8.setSpacing(73);
@@ -146,6 +122,10 @@ public class ComponentsList extends Pane {
         VBox.setMargin(h16, new Insets(2,0,2,0));
         VBox.setMargin(h17, new Insets(2,0,2,0));
         VBox.setMargin(h18, new Insets(2,0,2,0));
+        //Add button actions to create components
+        NOTBtn.setOnAction(e -> {
+            HelloApplication.workingSpace.getChildren().add(new NOTGate());
+        });
 
         getChildren().addAll(listview);
     }

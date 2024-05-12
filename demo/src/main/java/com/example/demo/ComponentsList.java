@@ -1,12 +1,15 @@
 package com.example.demo;
 
 import javafx.geometry.Insets;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.collections.FXCollections;
+
+import java.util.Objects;
 
 public class ComponentsList extends Pane {
     public ComponentsList() {
@@ -124,10 +127,18 @@ public class ComponentsList extends Pane {
         VBox.setMargin(h18, new Insets(2,0,2,0));
         //Add button actions to create components
         NOTBtn.setOnAction(e -> {
-            HelloApplication.workingSpace.getChildren().add(new NOTGate());
+            addComponent(new NOTGate());
         });
-
         getChildren().addAll(listview);
+    }
+
+    void addComponent (Node node) {
+        HelloApplication.workingSpace.getChildren().add(node);
+        node.setOnMouseClicked(event -> {
+            if (Objects.equals(ToolBar.tool, "Delete")) {
+                HelloApplication.workingSpace.getChildren().remove(node);
+            }
+        });
     }
 }
 

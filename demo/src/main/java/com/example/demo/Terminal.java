@@ -1,13 +1,21 @@
 package com.example.demo;
 
+import javafx.geometry.Point2D;
+import javafx.scene.Group;
 import javafx.scene.effect.DropShadow;
+import javafx.scene.input.MouseButton;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import javafx.scene.shape.Line;
+
+import java.util.Objects;
 
 public class Terminal extends Circle {
+    boolean state = false;
+
     //create shadows
     DropShadow shadow;
-    private boolean state = false;
+
     public Terminal(boolean isOutput) {
         super();
         // Set properties of the shadow
@@ -18,8 +26,8 @@ public class Terminal extends Circle {
         //style the circle
         setRadius(6);
         setFill(Color.GRAY);
-    }
 
+    }
 
     public void setState(boolean state) {
         this.state = state;

@@ -7,6 +7,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Line;
 import javafx.scene.transform.Scale;
 import javafx.stage.Stage;
 import java.io.IOException;
@@ -14,6 +15,7 @@ import java.util.Objects;
 
 public class HelloApplication extends Application {
     public static Pane workingSpace;
+    public static Line line;
     VBox root;
     @Override
     public void start(Stage stage) throws IOException {
@@ -33,7 +35,6 @@ public class HelloApplication extends Application {
 
        // Set the transformation pivot point to the center of the working space
         workingSpace.getTransforms().add(scale);
-
         // Add an event handler to the working space to handle zooming
         workingSpace.setOnScroll(event -> {
             double delta = event.getDeltaY();
@@ -42,10 +43,7 @@ public class HelloApplication extends Application {
             scale.setY(scale.getY() * scaleFactor);
 });
 
-        //test 8 bit converter
-        _8bit_converter converter = new _8bit_converter();
-        workingSpace.getChildren().add(converter);
-        workingSpace.getChildren().forEach(this::makeRemovable);
+
         //add elements to the root and show the stage
         root.getChildren().addAll(toolBar,mainSection);
         stage.setTitle("LogicSim || CSE#27");
@@ -53,15 +51,6 @@ public class HelloApplication extends Application {
         stage.show();
 
     }
-
-    void makeRemovable (Node node) {
-        node.setOnMouseClicked(event -> {
-            if (Objects.equals(ToolBar.tool, "Delete")) {
-                workingSpace.getChildren().remove(node);
-            }
-        });
-    }
-
 
     public static void main(String[] args) {
         launch();

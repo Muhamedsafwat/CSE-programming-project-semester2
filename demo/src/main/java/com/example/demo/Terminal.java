@@ -11,6 +11,7 @@ import javafx.scene.shape.Line;
 import java.util.Objects;
 
 public class Terminal extends Circle {
+    private Wire connectedWire = null;
     boolean state = false;
 
     //create shadows
@@ -34,7 +35,7 @@ public class Terminal extends Circle {
         updateStyle();
     }
     //update the appearance according to the state
-    private void updateStyle () {
+    public void updateStyle () {
         if (state) {
         setFill(Color.DARKCYAN);
         setEffect(shadow);
@@ -42,7 +43,17 @@ public class Terminal extends Circle {
             setFill(Color.GRAY);
             setEffect(null);
         }
+
     }
+
+    public void setConnectWire(Wire wire) {
+        this.connectedWire = wire;
+        System.out.println("setConnectWire is fired states is");
+    }
+    public Wire getConnectedWire () {
+        return this.connectedWire;
+    }
+
 
 
 }

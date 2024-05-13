@@ -129,6 +129,7 @@ public class ComponentsList extends Pane {
         NOTBtn.setOnAction(e -> {
             addComponent(new NOTGate());
         });
+
         getChildren().addAll(listview);
     }
 

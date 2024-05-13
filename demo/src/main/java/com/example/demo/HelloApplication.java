@@ -15,7 +15,6 @@ import java.util.Objects;
 
 public class HelloApplication extends Application {
     public static Pane workingSpace;
-    public static Line line;
     VBox root;
     @Override
     public void start(Stage stage) throws IOException {
@@ -42,8 +41,6 @@ public class HelloApplication extends Application {
             scale.setX(scale.getX() * scaleFactor);
             scale.setY(scale.getY() * scaleFactor);
 });
-
-
         //add elements to the root and show the stage
         root.getChildren().addAll(toolBar,mainSection);
         stage.setTitle("LogicSim || CSE#27");

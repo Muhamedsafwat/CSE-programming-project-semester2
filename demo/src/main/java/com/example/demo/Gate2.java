@@ -24,9 +24,6 @@ public abstract class Gate2 extends HBox{
 
     public Gate2(String imageURL) {
         super();
-        boolean input = false;
-        boolean output = false;
-
         // Create input & output button
         inputButton = new Terminal(false);
         outputButton = new Terminal(true);
@@ -50,25 +47,36 @@ public abstract class Gate2 extends HBox{
             if (Objects.equals(tool, "Drag")) {
                 setTranslateX(e.getSceneX() - startX);
                 setTranslateY(e.getSceneY() - startY);
+                if (inputButton.getConnectedWire() != null) {
+                inputButton.getConnectedWire().updatePosition();
+                }
+                if (outputButton.getConnectedWire() != null) {
+                   outputButton.getConnectedWire().updatePosition();
+                }
+
             }
         });
 
        this.inputButton.setOnMouseClicked(event ->  {if (event.getButton() == MouseButton.PRIMARY) {
             Wire.handleCircleClick(this.inputButton);
+            this.updateInputs();
             this.updateOutput();
-            System.out.println("output:" + output);
         }});
        this.outputButton.setOnMouseClicked(event ->  {if (event.getButton() == MouseButton.PRIMARY) {
             Wire.handleCircleClick(this.outputButton);
         }});
     }
 
+    // Method th update the input states when clicking on a terminal
+    void updateInputs() {
+        input = inputButton.state;
+        output = outputButton.state;
+
+    }
     // Method to update the output label based on input values
      void updateOutput() {
-        output = !input;
         inputButton.setState(input);
         outputButton.setState(output);
-
      }
     public static void updateTool () {
         tool = ToolBar.tool;

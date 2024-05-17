@@ -14,7 +14,7 @@ public class NodePositionProperty {
         double startCenterX = terminal.getCenterX();
         double startCenterY = terminal.getCenterY();
         Point2D startCenter = terminal.localToScene(startCenterX, startCenterY);
-         absoluteStartCenterX = startCenter.getX() - 253;
+         absoluteStartCenterX = startCenter.getX() - 257;
          absoluteStartCenterY = startCenter.getY() - 46;
 
     }

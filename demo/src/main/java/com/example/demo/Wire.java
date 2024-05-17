@@ -11,10 +11,12 @@ public class Wire extends CubicCurve {
     //bind properties in the drawn line
     Terminal terminal1;
     Terminal terminal2;
+    //line state
+    boolean state = false;
     public Wire() {
         super();
-        setStrokeWidth(2);
-        setStroke(Color.BLACK);
+        setStrokeWidth(3);
+        setStroke(Color.GRAY);
         setFill(Color.TRANSPARENT);
         setVisible(true);
     }
@@ -22,19 +24,23 @@ public class Wire extends CubicCurve {
     //draw the line method
     public static void handleCircleClick(Terminal terminal) {
         if (Objects.equals(ToolBar.tool, "Connect")) {
-            if (startCircle == null) {
+            if (startCircle == null && terminal.isOutput) {
                 // First circle clicked, set it as the start point
                 startCircle = terminal;
+                System.out.println("starting circle added");
+            } else if (!terminal.isOutput && startCircle != null) {
+                    // Second circle clicked, create a line between them
+                    Wire wire = new Wire();
+                    wire.setTerminal1(startCircle);
+                    wire.setTerminal2(terminal);
+                    wire.updateState();
+                    // Reset start circle
+                    HelloApplication.workingSpace.getChildren().add(wire);
+                    // Reset start circle
+                    startCircle = null;
+
             } else {
-                // Second circle clicked, create a line between them
-                Wire wire = new Wire();
-                terminal.setState(startCircle.state);
-                wire.setTerminal1(startCircle);
-                wire.setTerminal2(terminal);
-                // Reset start circle
-                HelloApplication.workingSpace.getChildren().add(wire);
-                // Reset start circle
-                startCircle = null;
+                Alertbox.showAlert("You can only connect output to input");
             }
         }
     }
@@ -42,7 +48,7 @@ public class Wire extends CubicCurve {
     //add terminals to the line
     void setTerminal1 (Terminal terminal1) {
         this.terminal1 = terminal1;
-        terminal1.setConnectWire(this);
+        this.terminal1.setConnectWire(this);
         NodePositionProperty terminalPosition = new NodePositionProperty(terminal1);
         //set starting points
         setStartX(terminalPosition.absoluteX());
@@ -54,7 +60,7 @@ public class Wire extends CubicCurve {
     }
     void setTerminal2 (Terminal terminal2) {
         this.terminal2 = terminal2;
-        terminal2.setConnectWire(this);
+        this.terminal2.setConnectWire(this);
         NodePositionProperty terminal2Position = new NodePositionProperty(terminal2);
         //set starting points
         setEndX(terminal2Position.absoluteX());
@@ -67,6 +73,24 @@ public class Wire extends CubicCurve {
     public void updatePosition () {
         this.setTerminal1(terminal1);
         this.setTerminal2(terminal2);
+    }
+    //update the state
+    void updateState () {
+        this.state = terminal1.state;
+        this.terminal2.setState(this.state);
+        if (this.state) {
+            setStroke(Color.DARKCYAN);
+        } else {
+            setStroke(Color.GRAY);
+        }
+    }
+
+    public void removeLine () {
+        this.terminal2.setState(false);
+        System.out.println("removing line");
+        this.terminal1.setConnectWire(null);
+        this.terminal2.setConnectWire(null);
+        HelloApplication.workingSpace.getChildren().remove(this);
     }
 
 }

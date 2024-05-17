@@ -20,6 +20,8 @@ public class ToolBar extends HBox {
     Button setDrag;
     Button setConnect;
     Button setDelete;
+    Button setRotateLeft;
+    Button setDisconnect;
     public ToolBar() {
         super();
         //create label
@@ -28,21 +30,29 @@ public class ToolBar extends HBox {
         title.setTextFill(Color.WHITE);
         title.setFont(Font.font("System", FontWeight.BOLD, 20));
         titleContainer.getChildren().add(title);
-        titleContainer.setPadding(new Insets(0, 130,0 , 0));
+        titleContainer.setPadding(new Insets(0, 140,0 , 0));
         //create buttons
         setDrag = new Button();
         setConnect = new Button();
         setDelete = new Button();
+        setRotateLeft = new Button();
+        setDisconnect = new Button();
         //create images for button icons
         ImageView connectIcon = new ImageView(new Image("connect.png"));
         ImageView moveIcon = new ImageView(new Image("move.png"));
         ImageView deleteIcon = new ImageView(new Image("delete.png"));
+        ImageView rotateIcon = new ImageView(new Image("rotateIcon.png"));
+        ImageView disconnectIcon = new ImageView(new Image("disconnect.png"));
         connectIcon.setFitHeight(20);
         connectIcon.setFitWidth(20);
         moveIcon.setFitHeight(20);
         moveIcon.setFitWidth(20);
         deleteIcon.setFitHeight(20);
         deleteIcon.setFitWidth(20);
+        rotateIcon.setFitHeight(20);
+        rotateIcon.setFitWidth(20);
+        disconnectIcon.setFitHeight(20);
+        disconnectIcon.setFitWidth(20);
         //add icons to buttons
         setDrag.setBackground(null);
         setDrag.setStyle("-fx-background-color: lightblue;");
@@ -51,6 +61,10 @@ public class ToolBar extends HBox {
         setDelete.setBackground(null);
         setDelete.setGraphic(deleteIcon);
         setConnect.setGraphic(connectIcon);
+        setRotateLeft.setBackground(null);
+        setRotateLeft.setGraphic(rotateIcon);
+        setDisconnect.setBackground(null);
+        setDisconnect.setGraphic(disconnectIcon);
         //handle button actions
         setDrag.setOnAction(e -> {
             updateState("Drag");
@@ -61,6 +75,12 @@ public class ToolBar extends HBox {
         setDelete.setOnAction(e -> {
             updateState("Delete");
         });
+        setRotateLeft.setOnAction(e -> {
+            updateState("RotateLeft");
+        });
+        setDisconnect.setOnAction(e -> {
+            updateState("Disconnect");
+        });
         //adjust the menu layout
         setPadding(new Insets(8,10,8,30 ));
         setBackground(new Background(new BackgroundFill(Color.web("#2B2D30"), null, null)));
@@ -70,7 +90,7 @@ public class ToolBar extends HBox {
         HBox.setHgrow(setDelete, javafx.scene.layout.Priority.ALWAYS);
         //add buttons to the toolbar
         setSpacing(10);
-        getChildren().addAll(titleContainer,setDrag, setConnect, setDelete);
+        getChildren().addAll(titleContainer,setDrag, setConnect,setDisconnect, setDelete, setRotateLeft);
 
     }
     //click handler
@@ -82,15 +102,34 @@ public class ToolBar extends HBox {
             setDrag.setStyle("-fx-background-color: lightblue;");
             setConnect.setStyle("-fx-background-color: transparent;");
             setDelete.setStyle("-fx-background-color: transparent;");
+            setRotateLeft.setStyle("-fx-background-color: transparent;");
+            setDisconnect.setStyle("-fx-background-color: transparent;");
         } else if (Objects.equals(state, "Connect")) {
             setConnect.setStyle("-fx-background-color: lightblue;");
             setDrag.setStyle("-fx-background-color: transparent;");
             setDelete.setStyle("-fx-background-color: transparent;");
+            setRotateLeft.setStyle("-fx-background-color: transparent;");
+            setDisconnect.setStyle("-fx-background-color: transparent;");
 
         } else if (Objects.equals(state, "Delete")) {
             setDelete.setStyle("-fx-background-color: lightblue;");
             setDrag.setStyle("-fx-background-color: transparent;");
             setConnect.setStyle("-fx-background-color: transparent;");
+            setRotateLeft.setStyle("-fx-background-color: transparent;");
+            setDisconnect.setStyle("-fx-background-color: transparent;");
+        } else if (Objects.equals(state, "RotateLeft")) {
+            setRotateLeft.setStyle("-fx-background-color: lightblue;");
+            setDelete.setStyle("-fx-background-color: transparent;");
+            setDrag.setStyle("-fx-background-color: transparent;");
+            setConnect.setStyle("-fx-background-color: transparent;");
+            setDisconnect.setStyle("-fx-background-color: transparent;");
+        } else if (Objects.equals(state, "Disconnect")) {
+            setDisconnect.setStyle("-fx-background-color: lightblue;");
+            setRotateLeft.setStyle("-fx-background-color: transparent;");
+            setConnect.setStyle("-fx-background-color: transparent;");
+            setDrag.setStyle("-fx-background-color: transparent;");
+            setDelete.setStyle("-fx-background-color: transparent;");
+
         }
 
     };

@@ -4,7 +4,7 @@ import javafx.scene.paint.Color;
 
 public class ORGate extends Gate{
     public ORGate() {
-        super("OR.png");
+        super("OR1.png");
     }
     @Override
     void updateOutput () {

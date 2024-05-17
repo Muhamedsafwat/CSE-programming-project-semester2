@@ -3,6 +3,7 @@ package com.example.demo;
 import javafx.geometry.Point2D;
 import javafx.scene.Group;
 import javafx.scene.effect.DropShadow;
+import javafx.scene.effect.Light;
 import javafx.scene.input.MouseButton;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -11,8 +12,15 @@ import javafx.scene.shape.Line;
 import java.util.Objects;
 
 public class Terminal extends Circle {
+    Gate2 parentNot;
+    Splitter parentSplitter;
+    Gate parentGate;
+    LightPulb parentLight;
+    FullAdder parentFullAdder;
+    HalfAdder parentHalfAdder;
     private Wire connectedWire = null;
     boolean state = false;
+    boolean isOutput = false;
 
     //create shadows
     DropShadow shadow;
@@ -24,14 +32,40 @@ public class Terminal extends Circle {
         shadow.setColor(Color.CYAN);
         shadow.setRadius(15);
         shadow.setSpread(.1);
+        this.isOutput = isOutput;
         //style the circle
         setRadius(6);
         setFill(Color.GRAY);
+
 
     }
 
     public void setState(boolean state) {
         this.state = state;
+        if (connectedWire != null && this.isOutput) {
+            connectedWire.updateState();
+        }
+        if (parentNot != null) {
+            parentNot.updateInputs();
+            parentNot.updateOutput();
+        }
+        if (parentSplitter != null) {
+            parentSplitter.updateInputs();
+            parentSplitter.updateOutput();
+        }
+        if (parentGate != null) {
+            parentGate.updateInputs();
+            parentGate.updateOutput();
+        }
+        if (parentLight != null) {
+            parentLight.updateInputs();
+        }
+        if (parentFullAdder != null) {
+            parentFullAdder.updateOutputs();
+        }
+        if (parentHalfAdder != null) {
+            parentHalfAdder.updateOutputs();
+        }
         updateStyle();
     }
     //update the appearance according to the state
@@ -48,12 +82,26 @@ public class Terminal extends Circle {
 
     public void setConnectWire(Wire wire) {
         this.connectedWire = wire;
-        System.out.println("setConnectWire is fired states is");
     }
     public Wire getConnectedWire () {
         return this.connectedWire;
     }
-
-
-
+    void setParentNot (Gate2 parent) {
+        this.parentNot = parent;
+    }
+    void setParentSplitter (Splitter splitter) {
+        this.parentSplitter = splitter;
+    }
+    void setParentGate (Gate parentGate) {
+        this.parentGate = parentGate;
+    }
+    void setParentLight (LightPulb lightPulb) {
+        this.parentLight = lightPulb;
+    }
+    void setParentFullAdder (FullAdder fullAdder) {
+        this.parentFullAdder = fullAdder;
+    }
+    void setParentHalfAdder (HalfAdder halfAdder) {
+        this.parentHalfAdder = halfAdder;
+    }
 }

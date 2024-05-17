@@ -1,17 +1,16 @@
 
 package com.example.demo;
 
+import javafx.geometry.Bounds;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.TextAlignment;
-
 import java.util.Objects;
 
 
@@ -31,24 +30,34 @@ public class _8bit_converter extends HBox{
         super();
         //create inputs
         input1 = new Terminal(false);
+        input1.setRadius(4);
         input2 = new Terminal(false);
+        input2.setRadius(4);
         input3 = new Terminal(false);
+        input3.setRadius(4);
         input4 = new Terminal(false);
+        input4.setRadius(4);
         input5 = new Terminal(false);
+        input5.setRadius(4);
         input6 = new Terminal(false);
+        input6.setRadius(4);
         input7 = new Terminal(false);
+        input7.setRadius(4);
         input8 = new Terminal(false);
+        input8.setRadius(4);
         //create labels
         label = new Label("0");
-        label.setFont(Font.font("", FontWeight.BOLD, 20));
+        label.setFont(Font.font("", FontWeight.BOLD, 18));
         label.setTextAlignment(TextAlignment.CENTER);
         //create input box and add inputs
         VBox inputBox = new VBox(input1,input2,input3,input4,input5,input6,input7,input8);
-        inputBox.setSpacing(7);
+        inputBox.setSpacing(3);
         inputBox.setTranslateY(1);
         inputBox.setAlignment(Pos.CENTER);
         //converter image
-        image = new ImageView("8-bit Digit.png");
+        image = new ImageView("8bit.png");
+        image.setFitWidth(70);
+        image.setFitHeight(100);
         //handle click events
         input1.setOnMouseClicked(e -> {
             states[7] = !states[7];
@@ -101,7 +110,7 @@ public class _8bit_converter extends HBox{
         //create Stack pane for display
         VBox output = new VBox(label);
         output.setAlignment(Pos.CENTER);
-        output.setMaxWidth(64);
+        output.setMaxWidth(50);
         StackPane display = new StackPane(image,output);
         display.setAlignment(Pos.TOP_RIGHT);
         getChildren().addAll(inputBox,display);
@@ -115,8 +124,16 @@ public class _8bit_converter extends HBox{
         });
         setOnMouseDragged(e -> {
             if (Objects.equals(tool, "Drag")) {
-                setTranslateX(e.getSceneX() - startX);
-                setTranslateY(e.getSceneY() - startY);
+                Bounds parentBounds = HelloApplication.workingSpace.getBoundsInLocal();
+                double newX = e.getSceneX() - startX;
+                double newY = e.getSceneY() - startY;
+                // Ensure the circle stays within the bounds of the parent pane
+                if (newX >= 0 && newX <= parentBounds.getWidth() - this.getWidth()) {
+                    setTranslateX(newX);
+                }
+                if (newY >= 0 && newY <= parentBounds.getHeight() - this.getHeight()) {
+                    setTranslateY(newY);
+                }
             }
         });
 
@@ -129,7 +146,6 @@ public class _8bit_converter extends HBox{
         }
         return l;
     }
-
     void updateOutput() {
         input1.setState(states[7]);
         input2.setState(states[6]);
@@ -144,7 +160,6 @@ public class _8bit_converter extends HBox{
             else{bits[i] = 0 ;}
         }
     }
-
     //static method to update the tool
     public static void updateTool () {
         tool = ToolBar.tool;

@@ -3,7 +3,7 @@ package com.example.demo;
 public class XNORGate extends Gate{
 
     public XNORGate() {
-        super("XNOR.png");
+        super("XNOR1.png");
     }
     @Override
     void updateOutput () {

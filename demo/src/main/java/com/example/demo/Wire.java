@@ -88,7 +88,6 @@ public class Wire extends CubicCurve {
 
     public void removeLine () {
         this.terminal2.setState(false);
-        System.out.println("removing line");
         this.terminal1.setConnectWire(null);
         this.terminal2.setConnectWire(null);
         HelloApplication.workingSpace.getChildren().remove(this);

@@ -13,38 +13,50 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 
-public class IntToBits extends HBox {
+import java.util.Objects;
 
- public    int[] bitss = new int[8];
-   public boolean[] statess = new boolean[8];
-public int number;
+public class IntToBits extends HBox {
+ public int[] bitss = new int[8];
+ public boolean[] statess = new boolean[8];
+ public int number;
+ double startY;
+ double startX;
 
   Terminal OutPut1,OutPut2,OutPut3,OutPut4,OutPut5,OutPut6,OutPut7,OutPut8;
-
- public IntToBits(){
-
+  public IntToBits(){
   OutPut1 = new Terminal(true);
+  OutPut1.setRadius(4);
   OutPut2 = new Terminal(true);
+  OutPut2.setRadius(4);
   OutPut3 = new Terminal(true);
+  OutPut3.setRadius(4);
   OutPut4 = new Terminal(true);
+  OutPut4.setRadius(4);
   OutPut5 = new Terminal(true);
+  OutPut5.setRadius(4);
   OutPut6 = new Terminal(true);
+  OutPut6.setRadius(4);
   OutPut7 = new Terminal(true);
+  OutPut7.setRadius(4);
   OutPut8 = new Terminal(true);
+  OutPut8.setRadius(4);
 
      TextField field = new TextField();
      field.setAlignment(Pos.CENTER);
-     field.setMaxWidth(50);
+     field.setMaxWidth(40);
      field.setTranslateX(10);
+     field.setTranslateY(10);
      VBox V1 = new VBox(OutPut1,OutPut2,OutPut3,OutPut4,OutPut5,OutPut6,OutPut7,OutPut8);
      V1.setAlignment(Pos.CENTER);
-     V1.setSpacing(7);
-     ImageView image = new ImageView("8-bit Digit.png");
-     Button b1 = new Button("Enter ");
+     V1.setSpacing(3);
+     ImageView image = new ImageView("8bit.png");
+      image.setFitWidth(70);
+      image.setFitHeight(100);
+     Button b1 = new Button("+");
      b1.setAlignment(Pos.TOP_RIGHT);
-     b1.setTranslateY(-50);
+     b1.setTranslateY(-20);
      b1.setTranslateX(9);
-     b1.setMaxWidth(50);
+     b1.setMaxWidth(40);
      StackPane S = new StackPane(image,field,b1);
      getChildren().addAll(V1,S);
             b1.setOnMouseClicked(e->{
@@ -65,8 +77,157 @@ public int number;
                 OutPut6.setState(statess[5]);
                 OutPut7.setState(statess[6]);
                 OutPut8.setState(statess[7]);
-            }  );
-                   }
+            });
+
+      //drag and drop functionality
+      setTranslateX(10);
+      setTranslateY(10);
+      setOnMousePressed(e -> { if (Objects.equals(ToolBar.tool, "Drag")) {
+          startX = e.getSceneX() - getTranslateX();
+          startY = e.getSceneY() - getTranslateY();
+      } else if (Objects.equals(ToolBar.tool, "Delete")) {
+          HelloApplication.workingSpace.getChildren().remove(this);
+          if (OutPut1.getConnectedWire() != null) {
+              OutPut1.getConnectedWire().removeLine();
+             // this.updateInputs();
+          }
+          if (OutPut2.getConnectedWire() != null) {
+              OutPut2.getConnectedWire().removeLine();
+          }
+          if (OutPut3.getConnectedWire() != null) {
+              OutPut3.getConnectedWire().removeLine();
+          }
+          if (OutPut4.getConnectedWire() != null) {
+              OutPut4.getConnectedWire().removeLine();
+          }
+          if (OutPut5.getConnectedWire() != null) {
+              OutPut5.getConnectedWire().removeLine();
+          }
+          if (OutPut6.getConnectedWire() != null) {
+              OutPut6.getConnectedWire().removeLine();
+          }
+          if (OutPut7.getConnectedWire() != null) {
+              OutPut7.getConnectedWire().removeLine();
+          }
+          if (OutPut8.getConnectedWire() != null) {
+              OutPut8.getConnectedWire().removeLine();
+          }
+      } else if (Objects.equals(ToolBar.tool, "RotateLeft")) {
+          setRotate(getRotate() - 90);
+          if (OutPut1.getConnectedWire() != null) {
+              OutPut1.getConnectedWire().updatePosition();
+          }
+          if (OutPut2.getConnectedWire() != null) {
+              OutPut2.getConnectedWire().updatePosition();
+          }
+          if (OutPut3.getConnectedWire() != null) {
+              OutPut3.getConnectedWire().updatePosition();
+          }
+          if (OutPut4.getConnectedWire() != null) {
+              OutPut4.getConnectedWire().updatePosition();
+          }
+          if (OutPut5.getConnectedWire() != null) {
+              OutPut5.getConnectedWire().updatePosition();
+          }
+          if (OutPut6.getConnectedWire() != null) {
+              OutPut6.getConnectedWire().updatePosition();
+          }
+          if (OutPut7.getConnectedWire() != null) {
+              OutPut7.getConnectedWire().updatePosition();
+          }
+          if (OutPut8.getConnectedWire() != null) {
+              OutPut8.getConnectedWire().updatePosition();
+          }
+      }
+      });
+      setOnMouseDragged(e -> {
+          if (Objects.equals(ToolBar.tool, "Drag")) {
+              setTranslateX(e.getSceneX() - startX);
+              setTranslateY(e.getSceneY() - startY);
+              if (OutPut1.getConnectedWire() != null) {
+                  OutPut1.getConnectedWire().updatePosition();
+              }
+              if (OutPut2.getConnectedWire() != null) {
+                  OutPut2.getConnectedWire().updatePosition();
+              }
+              if (OutPut3.getConnectedWire() != null) {
+                  OutPut3.getConnectedWire().updatePosition();
+              }
+              if (OutPut4.getConnectedWire() != null) {
+                  OutPut4.getConnectedWire().updatePosition();
+              }
+              if (OutPut5.getConnectedWire() != null) {
+                  OutPut5.getConnectedWire().updatePosition();
+              }
+              if (OutPut6.getConnectedWire() != null) {
+                  OutPut6.getConnectedWire().updatePosition();
+              }
+              if (OutPut7.getConnectedWire() != null) {
+                  OutPut7.getConnectedWire().updatePosition();
+              }
+              if (OutPut8.getConnectedWire() != null) {
+                  OutPut8.getConnectedWire().updatePosition();
+              }
+          }
+      });
+
+      this.OutPut1.setOnMouseClicked(event ->  {if ( Objects.equals(ToolBar.tool, "Connect")) {
+          Wire.handleCircleClick(this.OutPut1);
+      } else if (Objects.equals(ToolBar.tool, "Disconnect") && this.OutPut1.getConnectedWire() != null) {
+          OutPut1.getConnectedWire().removeLine();
+      }
+      });
+      this.OutPut2.setOnMouseClicked(event ->  {if (Objects.equals(ToolBar.tool, "Connect")) {
+          Wire.handleCircleClick(this.OutPut2);
+      }
+      else if (Objects.equals(ToolBar.tool, "Disconnect") && this.OutPut2.getConnectedWire() != null) {
+          OutPut2.getConnectedWire().removeLine();
+      }
+      });
+      this.OutPut3.setOnMouseClicked(event ->  {if (Objects.equals(ToolBar.tool, "Connect")) {
+          Wire.handleCircleClick(this.OutPut3);
+      }
+      else if (Objects.equals(ToolBar.tool, "Disconnect") && this.OutPut3.getConnectedWire() != null) {
+          OutPut3.getConnectedWire().removeLine();
+      }
+      });
+      this.OutPut4.setOnMouseClicked(event ->  {if (Objects.equals(ToolBar.tool, "Connect")) {
+          Wire.handleCircleClick(this.OutPut4);
+      }
+      else if (Objects.equals(ToolBar.tool, "Disconnect") && this.OutPut4.getConnectedWire() != null) {
+          OutPut4.getConnectedWire().removeLine();
+      }
+      });
+      this.OutPut5.setOnMouseClicked(event ->  {if (Objects.equals(ToolBar.tool, "Connect")) {
+          Wire.handleCircleClick(this.OutPut5);
+      }
+      else if (Objects.equals(ToolBar.tool, "Disconnect") && this.OutPut5.getConnectedWire() != null) {
+          OutPut5.getConnectedWire().removeLine();
+      }
+      });
+      this.OutPut6.setOnMouseClicked(event ->  {if (Objects.equals(ToolBar.tool, "Connect")) {
+          Wire.handleCircleClick(this.OutPut6);
+      }
+      else if (Objects.equals(ToolBar.tool, "Disconnect") && this.OutPut6.getConnectedWire() != null) {
+          OutPut6.getConnectedWire().removeLine();
+      }
+      });
+      this.OutPut7.setOnMouseClicked(event ->  {if (Objects.equals(ToolBar.tool, "Connect")) {
+          Wire.handleCircleClick(this.OutPut7);
+      }
+      else if (Objects.equals(ToolBar.tool, "Disconnect") && this.OutPut7.getConnectedWire() != null) {
+          OutPut7.getConnectedWire().removeLine();
+      }
+      });
+      this.OutPut8.setOnMouseClicked(event ->  {if (Objects.equals(ToolBar.tool, "Connect")) {
+          Wire.handleCircleClick(this.OutPut8);
+      }
+      else if (Objects.equals(ToolBar.tool, "Disconnect") && this.OutPut8.getConnectedWire() != null) {
+          OutPut8.getConnectedWire().removeLine();
+      }
+      });
+  }
+
     public  int[] intToBits(int number) {
         int[] bits = new int[8];
         for (int i = 7; i >= 0; i--) {
@@ -75,3 +236,4 @@ public int number;
         return bits;
     }
 }
+

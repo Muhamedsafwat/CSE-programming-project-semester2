@@ -12,12 +12,13 @@ import javafx.scene.shape.Line;
 import java.util.Objects;
 
 public class Terminal extends Circle {
-    Gate2 parentNot;
+    NOTGate parentNot;
     Splitter parentSplitter;
     Gate parentGate;
     LightPulb parentLight;
     FullAdder parentFullAdder;
     HalfAdder parentHalfAdder;
+    Multiplexer4to1 parentMultiplexer;
     private Wire connectedWire = null;
     boolean state = false;
     boolean isOutput = false;
@@ -75,7 +76,6 @@ public class Terminal extends Circle {
             setFill(Color.GRAY);
             setEffect(null);
         }
-
     }
 
     public void setConnectWire(Wire wire) {
@@ -84,7 +84,7 @@ public class Terminal extends Circle {
     public Wire getConnectedWire () {
         return this.connectedWire;
     }
-    void setParentNot (Gate2 parent) {
+    void setParentNot (NOTGate parent) {
         this.parentNot = parent;
     }
     void setParentSplitter (Splitter splitter) {
@@ -101,5 +101,12 @@ public class Terminal extends Circle {
     }
     void setParentHalfAdder (HalfAdder halfAdder) {
         this.parentHalfAdder = halfAdder;
+    }
+    void setParentMultiplexer(Multiplexer4to1 multiplexer) {
+        this.parentMultiplexer = multiplexer;
+    }
+
+    public void setParentMultiplexer4to1(Multiplexer4to1 multiplexer4to1) {
+
     }
 }

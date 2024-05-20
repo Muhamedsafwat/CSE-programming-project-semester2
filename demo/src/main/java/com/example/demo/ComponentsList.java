@@ -190,6 +190,16 @@ public class ComponentsList extends ScrollPane {
         SplitterBtn.getChildren().addAll(splitter, SplitterLabel);
         SplitterBtn.setAlignment(Pos.CENTER);
         SplitterBtn.setOnMouseClicked(e -> addComponent(new Splitter()));
+        //Multiplexer
+        VBox MUX = new VBox();
+        Label muxLabel = new Label("Multiplexer");
+        muxLabel.setFont(Font.font("", FontWeight.BOLD, 12));
+        ImageView mux = new ImageView(new Image("Mux.png"));
+        mux.setFitHeight(60);
+        mux.setFitWidth(40);
+        MUX.getChildren().addAll(mux, muxLabel);
+        MUX.setAlignment(Pos.CENTER);
+        MUX.setOnMouseClicked(e -> addComponent(new Multiplexer4to1()));
 
         // Style buttons
         bt1.setStyle("-fx-background-color: black;");
@@ -239,7 +249,7 @@ public class ComponentsList extends ScrollPane {
         h11.getChildren().addAll(XNORBtn, halfAdderBtn);
         h12.getChildren().addAll(fullAdderBtn);
         h13.getChildren().add(bt11);
-        h14.getChildren().add(SplitterBtn);
+        h14.getChildren().addAll(SplitterBtn, MUX);
         h1.setPadding(new Insets(13)); // Add padding of 5 pixels
         h2.setPadding(new Insets(13));
         h3.setPadding(new Insets(13));

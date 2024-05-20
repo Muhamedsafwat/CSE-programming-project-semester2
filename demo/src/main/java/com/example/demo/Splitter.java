@@ -83,7 +83,6 @@ public class Splitter extends HBox{
             if (outputButton3.getConnectedWire() != null) {
                 outputButton3.getConnectedWire().updatePosition();
             }
-
         }
         });
         setOnMouseDragged(e -> {

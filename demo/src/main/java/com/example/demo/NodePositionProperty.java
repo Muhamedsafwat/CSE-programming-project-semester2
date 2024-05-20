@@ -13,13 +13,11 @@ public class NodePositionProperty {
         Point2D startCenter = terminal.localToScene(startCenterX, startCenterY);
          absoluteStartCenterX = startCenter.getX() - 284;
          absoluteStartCenterY = startCenter.getY() - 46;
-
     }
 
     public double absoluteX() {
         return absoluteStartCenterX;
     }
-
     public double absoluteY() {
         return absoluteStartCenterY;
     }

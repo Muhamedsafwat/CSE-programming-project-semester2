@@ -14,18 +14,15 @@ import java.util.Objects;
 
 
 public class Gate extends HBox {
-    public static String tool = ToolBar.tool;
     //define inputs and outputs
     boolean input1, input2, output = false;
     Terminal input1Button, input2Button, outputButton;
-    DropShadow shadow;
     //X and Y coordinates for drag & drop
     double startX;
     double startY;
 
     public Gate(String imageURL) {
         super();
-
         // Create input & output buttons
         input1Button = new Terminal(false);
         input1Button.setParentGate(this);
@@ -78,7 +75,7 @@ public class Gate extends HBox {
         //drag and drop
         });
         setOnMouseDragged(e -> {
-            if (Objects.equals(tool, "Drag")) {
+            if (Objects.equals(ToolBar.tool, "Drag")) {
                 Bounds parentBounds = HelloApplication.workingSpace.getBoundsInLocal();
                 double newX = e.getSceneX() - startX;
                 double newY = e.getSceneY() - startY;
@@ -100,8 +97,9 @@ public class Gate extends HBox {
                 }
             }
         });
+
         //connecting functionality
-        this.input1Button.setOnMouseClicked(event ->  {if ( Objects.equals(ToolBar.tool, "Connect")) {
+        this.input1Button.setOnMouseClicked(event ->  {if (Objects.equals(ToolBar.tool, "Connect")) {
             Wire.handleCircleClick(this.input1Button);
         } else if (Objects.equals(ToolBar.tool, "Disconnect") && this.input1Button.getConnectedWire() != null) {
             input1Button.getConnectedWire().removeLine();
@@ -133,9 +131,5 @@ public class Gate extends HBox {
     // Method to update the output label based on input values
     void updateOutput() {
         outputButton.setState(output);
-    }
-    //static method to update the tool
-    public static void updateTool () {
-        tool = ToolBar.tool;
     }
 }

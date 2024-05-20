@@ -71,6 +71,19 @@ public class Splitter extends HBox{
             }
         } else if (Objects.equals(ToolBar.tool, "RotateLeft")) {
             setRotate(getRotate() - 90);
+            if (inputButton.getConnectedWire() != null) {
+                inputButton.getConnectedWire().updatePosition();
+            }
+            if (outputButton1.getConnectedWire() != null) {
+                outputButton1.getConnectedWire().updatePosition();
+            }
+            if (outputButton2.getConnectedWire() != null) {
+                outputButton2.getConnectedWire().updatePosition();
+            }
+            if (outputButton3.getConnectedWire() != null) {
+                outputButton3.getConnectedWire().updatePosition();
+            }
+
         }
         });
         setOnMouseDragged(e -> {

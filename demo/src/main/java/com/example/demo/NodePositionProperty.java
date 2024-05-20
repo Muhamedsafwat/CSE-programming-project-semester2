@@ -1,9 +1,6 @@
 package com.example.demo;
 
-import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.SimpleDoubleProperty;
 import javafx.geometry.Point2D;
-import javafx.scene.Node;
 
 public class NodePositionProperty {
 
@@ -14,7 +11,7 @@ public class NodePositionProperty {
         double startCenterX = terminal.getCenterX();
         double startCenterY = terminal.getCenterY();
         Point2D startCenter = terminal.localToScene(startCenterX, startCenterY);
-         absoluteStartCenterX = startCenter.getX() - 257;
+         absoluteStartCenterX = startCenter.getX() - 284;
          absoluteStartCenterY = startCenter.getY() - 46;
 
     }

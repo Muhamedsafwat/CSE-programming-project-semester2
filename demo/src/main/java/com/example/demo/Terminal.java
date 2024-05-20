@@ -36,8 +36,6 @@ public class Terminal extends Circle {
         //style the circle
         setRadius(6);
         setFill(Color.GRAY);
-
-
     }
 
     public void setState(boolean state) {

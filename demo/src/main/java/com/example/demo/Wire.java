@@ -24,11 +24,10 @@ public class Wire extends CubicCurve {
     //draw the line method
     public static void handleCircleClick(Terminal terminal) {
         if (Objects.equals(ToolBar.tool, "Connect")) {
-            if (startCircle == null && terminal.isOutput) {
+            if (startCircle == null && terminal.isOutput && terminal.getConnectedWire() == null) {
                 // First circle clicked, set it as the start point
                 startCircle = terminal;
-                System.out.println("starting circle added");
-            } else if (!terminal.isOutput && startCircle != null) {
+            } else if (!terminal.isOutput && startCircle != null && terminal.getConnectedWire() == null) {
                     // Second circle clicked, create a line between them
                     Wire wire = new Wire();
                     wire.setTerminal1(startCircle);
@@ -39,8 +38,10 @@ public class Wire extends CubicCurve {
                     // Reset start circle
                     startCircle = null;
 
-            } else {
+            } else if (!terminal.isOutput) {
                 Alertbox.showAlert("You can only connect output to input");
+            } else if (terminal.getConnectedWire() != null ) {
+                Alertbox.showAlert("This terminal is already connected\n if you want to connect multiple wires try using a splitter instead");
             }
         }
     }

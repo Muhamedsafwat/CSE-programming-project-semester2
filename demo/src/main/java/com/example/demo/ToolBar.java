@@ -96,8 +96,6 @@ public class ToolBar extends HBox {
     //click handler
     void updateState (String state) {
         tool = state;
-        Gate.updateTool();
-        Gate2.updateTool();
         if (Objects.equals(state, "Drag")) {
             setDrag.setStyle("-fx-background-color: lightblue;");
             setConnect.setStyle("-fx-background-color: transparent;");

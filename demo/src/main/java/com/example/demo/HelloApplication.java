@@ -40,9 +40,6 @@ public class HelloApplication extends Application {
         ToolBar toolBar = new ToolBar();
         mainSection.getChildren().addAll(componentsList, scrollPane);
         //add elements to the root and show the stage
-        //test int to bits
-        IntToBits intToBits = new IntToBits();
-        workingSpace.getChildren().add(intToBits);
         root.getChildren().addAll(toolBar,mainSection);
         Image icon = new Image("appicon.png");
         stage.setTitle("LogicSim || CSE#27");

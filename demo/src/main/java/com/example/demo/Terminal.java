@@ -19,6 +19,7 @@ public class Terminal extends Circle {
     FullAdder parentFullAdder;
     HalfAdder parentHalfAdder;
     Multiplexer4to1 parentMultiplexer;
+    _8bit_converter parent8bit_converter;
     private Wire connectedWire = null;
     boolean state = false;
     boolean isOutput = false;
@@ -65,6 +66,12 @@ public class Terminal extends Circle {
         if (parentHalfAdder != null) {
             parentHalfAdder.updateOutputs();
         }
+        if (parent8bit_converter != null) {
+            parent8bit_converter.updateOutput();
+        }
+        if (parentMultiplexer != null) {
+            parentMultiplexer.updateOutputs();
+        }
         updateStyle();
     }
     //update the appearance according to the state
@@ -102,11 +109,10 @@ public class Terminal extends Circle {
     void setParentHalfAdder (HalfAdder halfAdder) {
         this.parentHalfAdder = halfAdder;
     }
-    void setParentMultiplexer(Multiplexer4to1 multiplexer) {
+    void setParentMultiplexer4to1(Multiplexer4to1 multiplexer) {
         this.parentMultiplexer = multiplexer;
     }
-
-    public void setParentMultiplexer4to1(Multiplexer4to1 multiplexer4to1) {
-
+    void setParent8bit_converter (_8bit_converter converter) {
+        this.parent8bit_converter = converter;
     }
 }

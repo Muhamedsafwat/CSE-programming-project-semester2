@@ -125,8 +125,8 @@ public class ComponentsList extends ScrollPane {
         Label _8bitLabel = new Label("8-bit display");
         _8bitLabel.setFont(Font.font("", FontWeight.BOLD, 12));
         ImageView BIT = new ImageView(new Image("8bit-list.png"));
-        BIT.setFitHeight(42);
-        BIT.setFitWidth(60);
+        BIT.setFitHeight(60);
+        BIT.setFitWidth(40);
         _8bitBtn.getChildren().addAll(BIT, _8bitLabel);
         _8bitBtn.setAlignment(Pos.CENTER);
         _8bitBtn.setOnMouseClicked(e -> addComponent(new _8bit_converter()));
@@ -200,6 +200,17 @@ public class ComponentsList extends ScrollPane {
         MUX.getChildren().addAll(mux, muxLabel);
         MUX.setAlignment(Pos.CENTER);
         MUX.setOnMouseClicked(e -> addComponent(new Multiplexer4to1()));
+        //int to bits
+        VBox intTobits = new VBox();
+        Label intTobitsLabel = new Label("Int to bits");
+        intTobitsLabel.setFont(Font.font("", FontWeight.BOLD, 12));
+        ImageView intToBitsimg = new ImageView(new Image("8bit-list.PNG"));
+        intToBitsimg.setFitHeight(60);
+        intToBitsimg.setFitWidth(40);
+        intToBitsimg.setScaleX(-1);
+        intTobits.getChildren().addAll(intToBitsimg, intTobitsLabel);
+        intTobits.setAlignment(Pos.CENTER);
+        intTobits.setOnMouseClicked(e -> addComponent(new IntToBits()));
 
         // Style buttons
         bt1.setStyle("-fx-background-color: black;");
@@ -238,7 +249,7 @@ public class ComponentsList extends ScrollPane {
         HBox h14 = new HBox();
         // Add buttons to HBoxes
         h1.getChildren().addAll(bt1);
-        h2.getChildren().addAll(SwitchBtn);
+        h2.getChildren().addAll(SwitchBtn, intTobits);
         h3.getChildren().addAll(constLowBtn, constHighBtn);
         h6.getChildren().addAll(LEDBtn, _8bitBtn);
         h5.getChildren().addAll(bt7);
@@ -264,7 +275,7 @@ public class ComponentsList extends ScrollPane {
         h13.setPadding(new Insets(5));
         h14.setPadding(new Insets(13));
         // Set HBoxes spacings
-        h2.setSpacing(50);
+        h2.setSpacing(75);
         h3.setSpacing(90);
         h6.setSpacing(90);
         h7.setSpacing(50);

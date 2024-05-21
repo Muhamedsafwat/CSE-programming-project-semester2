@@ -4,13 +4,14 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import javafx.util.Duration;
 
 import java.util.Objects;
@@ -44,39 +45,54 @@ public class IntToBits extends HBox {
      TextField field = new TextField();
      field.setAlignment(Pos.CENTER);
      field.setMaxWidth(40);
-     field.setTranslateX(10);
+     field.setTranslateX(-12);
      field.setTranslateY(10);
+     field.setPadding(new Insets(0,0,0, 0));
+     field.setBackground(null);
+     field.setBorder(new Border(new BorderStroke(Color.BLACK,
+             BorderStrokeStyle.SOLID, new CornerRadii(10), BorderWidths.DEFAULT)));
+
      VBox V1 = new VBox(OutPut1,OutPut2,OutPut3,OutPut4,OutPut5,OutPut6,OutPut7,OutPut8);
      V1.setAlignment(Pos.CENTER);
      V1.setSpacing(3);
      ImageView image = new ImageView("8bit.png");
       image.setFitWidth(70);
       image.setFitHeight(100);
-     Button b1 = new Button("+");
+      image.setScaleX(-1);
+     Button b1 = new Button();
      b1.setAlignment(Pos.TOP_RIGHT);
      b1.setTranslateY(-20);
-     b1.setTranslateX(9);
+     b1.setTranslateX(-12);
      b1.setMaxWidth(40);
+     ImageView plusIcon = new ImageView(new Image("plus.png"));
+      plusIcon.setFitHeight(20);
+      plusIcon.setFitWidth(20);
+      b1.setBackground(null);
+      b1.setGraphic(plusIcon);
      StackPane S = new StackPane(image,field,b1);
-     getChildren().addAll(V1,S);
+     getChildren().addAll(S, V1);
             b1.setOnMouseClicked(e->{
+                if (!field.getText().isEmpty() && Integer.parseInt(field.getText()) < 256 && Integer.parseInt(field.getText()) >= 0 ) {
                 number = Integer.parseInt(field.getText());
-                bitss  = intToBits(number);
-                for(int i=0 ; i<8 ; i++) {
-                    if (bitss[i] == 1) {
-                        statess[i] = true ;
-                    } else {
-                        statess[i] = false;
+                    bitss = intToBits(number);
+                    for (int i = 0; i < 8; i++) {
+                        if (bitss[i] == 1) {
+                            statess[i] = true;
+                        } else {
+                            statess[i] = false;
+                        }
                     }
+                    OutPut1.setState(statess[0]);
+                    OutPut2.setState(statess[1]);
+                    OutPut3.setState(statess[2]);
+                    OutPut4.setState(statess[3]);
+                    OutPut5.setState(statess[4]);
+                    OutPut6.setState(statess[5]);
+                    OutPut7.setState(statess[6]);
+                    OutPut8.setState(statess[7]);
+                } else {
+                    Alertbox.showAlert("Please enter a number between 0 and 255");
                 }
-                OutPut1.setState(statess[0]);
-                OutPut2.setState(statess[1]);
-                OutPut3.setState(statess[2]);
-                OutPut4.setState(statess[3]);
-                OutPut5.setState(statess[4]);
-                OutPut6.setState(statess[5]);
-                OutPut7.setState(statess[6]);
-                OutPut8.setState(statess[7]);
             });
 
       //drag and drop functionality

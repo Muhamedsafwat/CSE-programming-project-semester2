@@ -23,7 +23,6 @@ public class HelloApplication extends Application {
         ComponentsList componentsList  = new ComponentsList();
         HBox mainSection = new HBox();
         workingSpace = new Pane();
-        workingSpace.setPrefSize(2000, 2000);
         // Load the image
         Image backgroundImage = new Image("Grid.png");
         // Create a BackgroundImage
@@ -34,11 +33,11 @@ public class HelloApplication extends Application {
         Background backgroundImg = new Background(background);
         // Set the background
         workingSpace.setBackground(backgroundImg);
-        ScrollPane scrollPane = new ScrollPane(workingSpace);
-        scrollPane.prefWidthProperty().bind(stage.widthProperty().subtract(253));
-        scrollPane.setPrefHeight(1000);
+
+        workingSpace.prefWidthProperty().bind(stage.widthProperty().subtract(253));
+        workingSpace.setPrefHeight(1000);
         ToolBar toolBar = new ToolBar();
-        mainSection.getChildren().addAll(componentsList, scrollPane);
+        mainSection.getChildren().addAll(componentsList, workingSpace);
         //add elements to the root and show the stage
         root.getChildren().addAll(toolBar,mainSection);
         Image icon = new Image("appicon.png");

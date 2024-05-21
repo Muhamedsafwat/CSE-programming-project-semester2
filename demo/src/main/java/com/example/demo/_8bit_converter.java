@@ -136,8 +136,16 @@ public class _8bit_converter extends HBox{
         });
         setOnMouseDragged(e -> {
             if (Objects.equals(ToolBar.tool, "Drag")) {
-                setTranslateX(e.getSceneX() - startX);
-                setTranslateY(e.getSceneY() - startY);
+                Bounds parentBounds = HelloApplication.workingSpace.getBoundsInLocal();
+                double newX = e.getSceneX() - startX;
+                double newY = e.getSceneY() - startY;
+                // Ensure the circle stays within the bounds of the parent pane
+                if (newX >= 0 && newX <= parentBounds.getWidth() - this.getWidth()) {
+                    setTranslateX(newX);
+                }
+                if (newY >= 0 && newY <= parentBounds.getHeight() - this.getHeight()) {
+                    setTranslateY(newY);
+                }
                 if (input1.getConnectedWire() != null) {
                     input1.getConnectedWire().updatePosition();
                 }

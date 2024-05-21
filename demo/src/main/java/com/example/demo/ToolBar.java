@@ -22,6 +22,7 @@ public class ToolBar extends HBox {
     Button setDelete;
     Button setRotateLeft;
     Button setDisconnect;
+    Button clearBtn;
     public ToolBar() {
         super();
         //create label
@@ -37,12 +38,14 @@ public class ToolBar extends HBox {
         setDelete = new Button();
         setRotateLeft = new Button();
         setDisconnect = new Button();
+        clearBtn = new Button();
         //create images for button icons
         ImageView connectIcon = new ImageView(new Image("connect.png"));
         ImageView moveIcon = new ImageView(new Image("move.png"));
         ImageView deleteIcon = new ImageView(new Image("delete.png"));
         ImageView rotateIcon = new ImageView(new Image("rotateIcon.png"));
         ImageView disconnectIcon = new ImageView(new Image("disconnect.png"));
+        ImageView clearIcon = new ImageView(new Image("clear.png"));
         connectIcon.setFitHeight(20);
         connectIcon.setFitWidth(20);
         moveIcon.setFitHeight(20);
@@ -53,6 +56,8 @@ public class ToolBar extends HBox {
         rotateIcon.setFitWidth(20);
         disconnectIcon.setFitHeight(20);
         disconnectIcon.setFitWidth(20);
+        clearIcon.setFitHeight(20);
+        clearIcon.setFitWidth(20);
         //add icons to buttons
         setDrag.setBackground(null);
         setDrag.setStyle("-fx-background-color: lightblue;");
@@ -65,6 +70,10 @@ public class ToolBar extends HBox {
         setRotateLeft.setGraphic(rotateIcon);
         setDisconnect.setBackground(null);
         setDisconnect.setGraphic(disconnectIcon);
+        clearBtn.setGraphic(clearIcon);
+        clearBtn.setBackground(null);
+        clearBtn.setStyle("-fx-background-color: lightblue;");
+
         //handle button actions
         setDrag.setOnAction(e -> {
             updateState("Drag");
@@ -81,6 +90,9 @@ public class ToolBar extends HBox {
         setDisconnect.setOnAction(e -> {
             updateState("Disconnect");
         });
+        clearBtn.setOnAction(e -> {
+            HelloApplication.workingSpace.getChildren().clear();
+        });
         //adjust the menu layout
         setPadding(new Insets(8,10,8,30 ));
         setBackground(new Background(new BackgroundFill(Color.web("#2B2D30"), null, null)));
@@ -90,7 +102,7 @@ public class ToolBar extends HBox {
         HBox.setHgrow(setDelete, javafx.scene.layout.Priority.ALWAYS);
         //add buttons to the toolbar
         setSpacing(10);
-        getChildren().addAll(titleContainer,setDrag, setConnect,setDisconnect, setDelete, setRotateLeft);
+        getChildren().addAll(titleContainer,setDrag, setConnect,setDisconnect, setDelete, setRotateLeft, clearBtn);
 
     }
     //click handler

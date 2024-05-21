@@ -52,7 +52,7 @@ public class Wire extends CubicCurve {
         this.terminal1.setConnectWire(this);
         NodePositionProperty terminalPosition = new NodePositionProperty(terminal1);
         //set starting points
-        setStartX(terminalPosition.absoluteX());
+        setStartX(terminalPosition.absoluteX() + 5);
         setStartY(terminalPosition.absoluteY());
         //set control1 properties
         setControlX1(terminalPosition.absoluteX() + 50);
@@ -64,7 +64,7 @@ public class Wire extends CubicCurve {
         this.terminal2.setConnectWire(this);
         NodePositionProperty terminal2Position = new NodePositionProperty(terminal2);
         //set starting points
-        setEndX(terminal2Position.absoluteX());
+        setEndX(terminal2Position.absoluteX() + 3);
         setEndY(terminal2Position.absoluteY());
         //set control2 properties
         setControlX2(terminal2Position.absoluteX() - 50);
